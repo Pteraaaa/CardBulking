@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TCG {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  sets Set[]
+}
+
+model Set {
+  id   Int     @id @default(autoincrement())
+  name String
+  code String?
+
+  tcg   TCG? @relation(fields: [tcgId], references: [id])
+  tcgId Int?
+
+  cards Card[]
+
+  @@unique([tcgId, name])
+}
+
+model Card {
+  id     Int     @id @default(autoincrement())
+  name   String
+  number String?
+  rarity String?
+
+  quantity Int @default(1)
+
+  set   Set? @relation(fields: [setId], references: [id])
+  setId Int?
+}
