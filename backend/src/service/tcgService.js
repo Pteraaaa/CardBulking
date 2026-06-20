@@ -8,8 +8,13 @@ async function createTCG(data){
     });
 
     return tcg;
-}  
+}
+
+async function viewAllTCG() {
+    return await prisma.tCG.findMany();
+}
 
 module.exports = {
-    createTCG
+    createTCG,
+    viewAllTCG
 };

@@ -12,6 +12,11 @@ async function createSet(data){
     return set;
 }  
 
+async function viewAllSet() {
+    return await prisma.set.findMany();
+}
+
 module.exports = {
-    createSet
+    createSet,
+    viewAllSet
 };

@@ -18,6 +18,25 @@ async function createTCG(req, res) {
     }
 }
 
+async function viewAllTCG(req, res) {
+    try {
+        const tcgs = await tcgService.viewAllTCG();
+
+        return res.status(200).json({
+            success: true,
+            tcgs
+        });
+    } catch (error) {
+        console.log(error);
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
-    createTCG
+    createTCG,
+    viewAllTCG
 };

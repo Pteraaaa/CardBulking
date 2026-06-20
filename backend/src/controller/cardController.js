@@ -18,6 +18,25 @@ async function createCard(req, res) {
     }
 }
 
+async function viewAllCards(req, res) {
+    try {
+        const cards = await cardService.viewAllCards();
+
+        res.status(200).json({
+            success: true,
+            tcgs
+        })
+    } catch (error) {
+        console.log(error)
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
-    createCard
+    createCard,
+    viewAllCards
 }

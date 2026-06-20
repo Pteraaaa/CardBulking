@@ -18,6 +18,25 @@ async function createSet(req, res) {
     }
 }
 
+async function viewAllSet(req, res) {
+    try {
+        const sets = await setService.viewAllSet();
+
+        return res.status(200).json({
+            success: true,
+            sets
+        })
+    } catch (error) {
+        console.log(error)
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
-    createSet
+    createSet,
+    viewAllSet
 };

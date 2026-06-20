@@ -11,8 +11,13 @@ async function createCard(data){
     });
 
     return card;
-}  
+}
+
+async function viewAllCards() {
+    return await prisma.card.findMany();
+}
 
 module.exports = {
-    createCard
+    createCard,
+    viewAllCards
 };
