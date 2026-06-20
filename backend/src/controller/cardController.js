@@ -24,7 +24,7 @@ async function viewAllCards(req, res) {
 
         res.status(200).json({
             success: true,
-            tcgs
+            cards
         })
     } catch (error) {
         console.log(error)
@@ -36,7 +36,26 @@ async function viewAllCards(req, res) {
     }
 }
 
+async function viewCardsByName(req, res) {
+    try {
+        const cards = await cardService.viewCardsByName();
+
+        res.status(200).json({
+            success: true,
+            cards
+        });
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        })
+    }
+}
+
 module.exports = {
     createCard,
-    viewAllCards
+    viewAllCards,
+    viewCardsByName
 }

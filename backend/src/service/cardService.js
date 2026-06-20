@@ -17,7 +17,19 @@ async function viewAllCards() {
     return await prisma.card.findMany();
 }
 
+async function viewCardsByName(name) {
+    return await prisma.card.findMany({
+        where: {
+            name: {
+                contains: name,
+                mode: 'insensitive'
+            }
+        }
+    });
+}
+
 module.exports = {
     createCard,
-    viewAllCards
+    viewAllCards,
+    viewCardsByName
 };
